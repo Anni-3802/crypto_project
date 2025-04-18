@@ -9,19 +9,22 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-dark bg-dark px-4">
-      <Link className="navbar-brand" to="/">AuthApp</Link>
+      <Link className="navbar-brand" to="/">CryptoApp</Link>
       <ul className="navbar-nav flex-row">
         {!isLoggedIn() ? (
           <>
+            
             <li className="nav-item mx-2">
-              <Link className="nav-link" to="/">Login</Link>
+              <Link className="nav-link" to="/login">Login</Link>
             </li>
             <li className="nav-item mx-2">
               <Link className="nav-link" to="/signup">Signup</Link>
             </li>
           </>
         ) : (
+         
           <li className="nav-item mx-2">
+            <Link to="/watchlist">Watchlist</Link>
             <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
           </li>
         )}
