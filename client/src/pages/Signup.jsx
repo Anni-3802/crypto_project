@@ -14,7 +14,7 @@ const Signup = () => {
     try {
       const res = await signupUser(form);
       setToken(res.data.token);
-      navigate('/dashboard');
+      navigate('/login');
     } catch (err) {
       alert(err.response?.data?.message || 'Signup failed');
     }

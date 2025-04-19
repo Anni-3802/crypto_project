@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { isLoggedIn } from '../utils/auth';
 
 const Home = () => {
   const [coins, setCoins] = useState([]);
@@ -15,7 +16,9 @@ const Home = () => {
       <ul>
         {coins.map(coin => (
           <li key={coin.id}>
-            <Link to={`/coin/${coin.id}`}>{coin.name}</Link>
+            {isLoggedIn ? <Link to={`/coin/${coin.id}`}>{coin.name}</Link>:
+            alert("Please Login !!!") }
+            
           </li>
         ))}
       </ul>
