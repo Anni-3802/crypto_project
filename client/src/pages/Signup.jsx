@@ -13,6 +13,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const res = await signupUser(form);
+      
       setToken(res.data.token);
       navigate('/login');
     } catch (err) {

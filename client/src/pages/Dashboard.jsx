@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getDashboard } from '../api/auth';
-import { isLoggedIn } from '../utils/auth';
+import { isLogin } from '../utils/auth';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn()) {
+    if (!isLogin()) {
       navigate('/');
       return;
     }
