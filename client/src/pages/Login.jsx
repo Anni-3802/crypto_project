@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { loginUser } from '../api/auth';
 import { setToken } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../utils/AuthContext';
 
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext)
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -13,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await loginUser(form);
-      setToken(res.data.token);
+      login(res.data.token);
       navigate('/');
     } catch (err) {
       alert(err.response?.data?.message || 'Login failed');

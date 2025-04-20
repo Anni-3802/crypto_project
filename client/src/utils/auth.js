@@ -14,7 +14,7 @@ export const isLogin = () => {
   const token = getToken();
   if (!token) return false;
   try {
-    const [, payload] = token.split('.');
+    const [,payload] = token.split('.');
     const decoded = JSON.parse(atob(payload));
     const currentTime = Math.floor(Date.now() / 1000);
     if (decoded.exp && decoded.exp < currentTime) {
@@ -26,6 +26,7 @@ export const isLogin = () => {
     return false;
   }
 };
+
 
 
 
