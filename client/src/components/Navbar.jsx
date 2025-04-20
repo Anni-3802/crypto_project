@@ -1,13 +1,11 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import {  isLogin, removeToken } from '../utils/auth';
 import { dashboard, login, signup, watchlist } from '../routes/RoutesLink';
+import { AuthContext } from '../utils/AuthContext';
 
 const Navbar = () => {
-  const handleLogout = () => {
-    removeToken();
-    window.location.href = '/';
-  };
-
+  const { isLogined, logout } = useContext(AuthContext)
+  
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -29,7 +27,7 @@ const Navbar = () => {
           </ul>
 
           <div className="ms-auto d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-2">
-            {!isLogin ?
+            {!isLogined ?
               <>
                 <Link to={login} className="btn btn-outline-primary w-auto">Login</Link>
                 <Link to={signup} className="btn btn-outline-secondary w-auto">Sign Up</Link>
@@ -37,7 +35,7 @@ const Navbar = () => {
               :
               <>
                 <Link to={watchlist} className="btn btn-outline-primary w-auto">WatchList</Link>
-                <button onClick={handleLogout} className="btn btn-outline-secondary w-auto">Log Out</button>
+                <button onClick={logout} className="btn btn-outline-secondary w-auto">Log Out</button>
               </>
             }
           </div>
