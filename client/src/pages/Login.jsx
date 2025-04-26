@@ -14,7 +14,7 @@ const Login = () => {
     try {
       const res = await loginUser(form);
       setToken(res.data.token);
-      navigate('/dashboard');
+      navigate('/');
     } catch (err) {
       alert(err.response?.data?.message || 'Login failed');
     }
@@ -31,3 +31,4 @@ const Login = () => {
 };
 
 export default Login;
+ 

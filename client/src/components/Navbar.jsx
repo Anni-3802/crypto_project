@@ -23,8 +23,9 @@ const Navbar = () => {
           </>
         ) : (
          
-          <li className="nav-item mx-2">
+          <li className="nav-item mx-2 ">
             <Link to="/watchlist">Watchlist</Link>
+            <Link to="/news">news</Link>
             <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
           </li>
         )}
@@ -34,3 +35,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+  
