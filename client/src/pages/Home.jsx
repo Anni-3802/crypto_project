@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {isLogin } from '../utils/auth';
+import { api } from '../api/auth';
+import { AuthContext } from '../utils/AuthContext';
 
 const Home = () => {
   const [coins, setCoins] = useState([]);
+  const { isLogined } = useContext(AuthContext)
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/crypto/top').then(res => setCoins(res.data));
+    api.get("/crypto/top").then((res) => { setCoins(res.data) });
   }, []);
+
 
   return (
     <div>
@@ -16,10 +18,10 @@ const Home = () => {
       <ul>
         {coins.map(coin => (
           <li key={coin.id}>
-            {isLogin? <Link to={`/coin/${coin.id}`}>{coin.name}</Link>:
-            alert("Please Login !!!") }
-            
+            {isLogined ? <Link to={`/coin/${coin.id}`}>{coin.name}</Link> :
+              <span>{coin.name} (Login to view details)</span>}
           </li>
+         
         ))}
       </ul>
     </div>
