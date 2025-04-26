@@ -21,9 +21,9 @@ const Navbar = () => {
             </li>
           </>
         ) : (
-          <li className="nav-item mx-2">
-            <Link className="nav-link" to="/watchlist">Watchlist</Link>
-            <Link className="nav-link" to="/news" style={{ marginLeft: '1rem' }}>News</Link>
+          <li className="nav-item  ">
+            <Link  to="/watchlist">Watchlist</Link>
+            <Link   to="/news" style={{ marginLeft: '1rem' }}>News</Link>
             <button className="btn btn-danger" onClick={handleLogout} style={{ marginLeft: '1rem' }}>Logout</button>
           </li>
         )} 
