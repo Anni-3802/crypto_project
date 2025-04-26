@@ -1,21 +1,17 @@
-// src/pages/CoinDetails.jsx
-import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { api } from '../api/auth';
 
 const CoinDetails = () => {
   const { id } = useParams();
   const [coin, setCoin] = useState(null);
 
   const addToWatchlist = () => {
-    axios.post(`http://localhost:5000/api/watchlist/${id}`, {}, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-    }).then(() => alert("Added to watchlist"))
-      .catch(err => alert(err.response.data.message));
+    api.post(`/watchlist/${id}`, {}).then(() => alert("Added to watchlist")).catch(err => alert(err.response.data.message));
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/crypto/${id}`).then(res => setCoin(res.data));
+    api.get(`/crypto/${id}`).then(res => setCoin(res.data));
   }, [id]);
 
   if (!coin) return <div>Loading...</div>;

@@ -5,18 +5,6 @@ import { AuthContext } from './AuthContext';
 export const AuthProvider = ({ children }) => {
   const [isLogined, setIsLogined] = useState(isLogin());
 
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setIsLogined(isLogin());
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
-
   const login = (token) => {
     setToken(token);
     setIsLogined(true);

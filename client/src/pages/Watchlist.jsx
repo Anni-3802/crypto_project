@@ -1,17 +1,20 @@
-// src/pages/Watchlist.jsx
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { api } from '../api/auth';
 
 const Watchlist = () => {
   const [watchlist, setWatchlist] = useState([]);
-  const [token, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/watchlist', {
-      headers: {
-        Authorization: `Bearer ${token}`
+    const WatchData = async () => {
+      try {
+        let res = await api.get('/watchlist')
+        setWatchlist(res.data)
+
+      } catch (error) {
+        console.error('Error fetching watchlist:', error);
       }
-    }).then(res => setWatchlist(res.data));
+    }
+    WatchData();
   }, []);
 
   return (
