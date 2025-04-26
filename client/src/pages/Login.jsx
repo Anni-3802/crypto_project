@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
-import { loginUser } from '../api/auth';
-import { setToken } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../api/auth';
 import { AuthContext } from '../utils/AuthContext';
 
 const Login = () => {
