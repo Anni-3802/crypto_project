@@ -3,10 +3,57 @@ import { api } from '../api/auth';
 import { HomepageCard } from '../components/CardsComponents';
 import { AuthContext } from '../utils/AuthContext';
 
-const Home = () => {
+function Home() {
   const [coins, setCoins] = useState([]);
-  const { isLogined } = useContext(AuthContext)
+  const [globalStats, setGlobalStats] = useState({});
+  const [portfolio, setPortfolio] = useState([]);
+  const [search, setSearch] = useState("");
+  const [sortField, setSortField] = useState("market_cap_rank");
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState({
+    market: false,
+    global: false,
+    portfolio: false,
+  });
+  const [error, setError] = useState({
+    market: null,
+    global: null,
+    portfolio: null,
+  });
 
+  const fetchWithRetry = async (
+    url,
+    setData,
+    setLoadingKey,
+    setErrorKey,
+    maxRetries = 3
+  ) => {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      setLoadingKey(true);
+      setErrorKey(null);
+      try {
+        const response = await axios.get(url);
+        setData(response.data);
+        return;
+      } catch (err) {
+        if (err.response?.status === 429 && attempt < maxRetries) {
+          console.log(`Rate limit hit, retrying (${attempt}/${maxRetries})...`);
+          await new Promise((resolve) => setTimeout(resolve, 2000 * attempt)); // Exponential backoff
+        } else {
+          setErrorKey(
+            err.response?.data?.msg ||
+              `Failed after ${attempt} attempts: ${err.message}`
+          );
+          return;
+        }
+      } finally {
+        setLoadingKey(false);
+      }
+    }
+  };
+
+  // Fetch data with retry
   useEffect(() => {
     api.get("/crypto/top").then((res) => { setCoins(res.data.slice(0, 4)) });
   }, []);
@@ -34,6 +81,6 @@ const Home = () => {
       </div>
     </>
   );
-};
+}
 
 export default Home;
