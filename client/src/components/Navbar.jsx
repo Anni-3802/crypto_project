@@ -26,7 +26,7 @@ const Navbar = () => {
             <Link className="nav-link" to="/news" style={{ marginLeft: '1rem' }}>News</Link>
             <button className="btn btn-danger" onClick={handleLogout} style={{ marginLeft: '1rem' }}>Logout</button>
           </li>
-        )}
+        )} 
       </ul>
     </nav>
   );
