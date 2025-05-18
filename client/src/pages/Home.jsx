@@ -53,7 +53,7 @@ function Home() {
         } else {
           setErrorKey(
             err.response?.data?.msg ||
-              `Failed after ${attempt} attempts: ${err.message}`
+            `Failed after ${attempt} attempts: ${err.message}`
           );
           return;
         }
@@ -113,7 +113,7 @@ function Home() {
   };
 
   return (
-    <Container className="my-5">
+    <Container className="mt-3">
       {/* Market Overview */}
       <h2 className="text-center mb-4">Market Overview</h2>
       {loading.global ? (

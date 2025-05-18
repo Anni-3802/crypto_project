@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getDashboard } from '../api/auth';
-import { isLoggedIn } from '../utils/auth';
+import { UserAuth } from '../context/UserAuth';
 
 const Dashboard = () => {
+  const {isUserLoggedIn} = useContext(UserAuth);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn()) {
+    if (!isUserLoggedIn()) {
       navigate('/');
       return;
     }
