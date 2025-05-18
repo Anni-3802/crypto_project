@@ -1,14 +1,10 @@
-import Navbar from './components/Navbar';
-import AppRoutes from './routes/AppRoutes';
+import { Routes } from './routes/Routes';
+import './App.css'
 
 const App = () => (
   <>
-    <Navbar />
-    <div className="container mt-4">
-      <AppRoutes />
-    </div>
+    <Routes />
   </>
 );
 
 export default App;
- 

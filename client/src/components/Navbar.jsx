@@ -1,33 +1,37 @@
-import { Link } from 'react-router-dom';
-import { isLoggedIn, removeToken } from '../utils/auth';
+import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserAuth } from '../context/UserAuth';
+import { login, news, signup, watchlist } from '../routes/Routelink';
 
 const Navbar = () => {
+  const { isUserLoggedIn, logout } = useContext(UserAuth);
+  const navigate = useNavigate();
+
   const handleLogout = () => {
-    removeToken();
-    window.location.href = '/';
+    logout();
+    alert("logged out successfully");
+    navigate('/');
   };
 
   return (
-    <nav className="navbar navbar-dark bg-dark px-4">
-      <Link className="navbar-brand" to="/">CryptoApp</Link>
-      <ul className="navbar-nav flex-row">
-        {!isLoggedIn() ? (
-          <>
-            <li className="nav-item mx-2">
-              <Link className="nav-link" to="/login">Login</Link>
-            </li>
-            <li className="nav-item mx-2">
-              <Link className="nav-link" to="/signup">Signup</Link>
-            </li>
-          </>
-        ) : (
-          <li className="nav-item mx-2">
-            <Link className="nav-link" to="/watchlist">Watchlist</Link>
-            <Link className="nav-link" to="/news" style={{ marginLeft: '1rem' }}>News</Link>
-            <button className="btn btn-danger" onClick={handleLogout} style={{ marginLeft: '1rem' }}>Logout</button>
-          </li>
-        )} 
-      </ul>
+    <nav className="navbar navbar-dark bg-dark position-fixed top-0 start-0 w-100 px-4" style={{ zIndex: 1030 }}>
+      <div className="container-fluid d-flex justify-content-between align-items-center">
+        <Link className="navbar-brand" to="/">CryptoApp</Link>
+        <div className="d-flex align-items-center">
+          {isUserLoggedIn ? (
+            <>
+              <Link className="nav-link text-white me-2" to={watchlist}>Watchlist</Link>
+              <Link className="nav-link text-white me-2" to={news}>News</Link>
+              <button className="btn btn-danger ms-2" onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <>
+              <Link className="btn btn-primary text-white me-2" to={login}>Login</Link>
+              <Link className="btn btn-primary text-white me-2" to={signup}>Signup</Link>
+            </>
+          )}
+        </div>
+      </div>
     </nav>
   );
 };

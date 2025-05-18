@@ -21,17 +21,20 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Signup</h2>
-      <input type="text" className="form-control my-2" name="name" placeholder="Name" onChange={handleChange} />
-      <input type="email" className="form-control my-2" name="email" placeholder="Email" onChange={handleChange} />
-      <input type="password" className="form-control my-2" name="password" placeholder="Password" onChange={handleChange} />
-      <button className="btn btn-primary">Register</button>
-    </form>
+    <div className='container mt-3'>
+      <form className='border rounded p-2' onSubmit={handleSubmit}>
+        <h2>Signup</h2>
+        <input type="text" className="form-control my-2" name="name" placeholder="Name" onChange={handleChange} />
+        <input type="email" className="form-control my-2" name="email" placeholder="Email" onChange={handleChange} />
+        <input type="password" className="form-control my-2" name="password" placeholder="Password" onChange={handleChange} />
+        <button className="btn btn-primary">Register</button>
+      </form>
+
+    </div>
+
   );
 };
 
 export default Signup;
 
 
- 

@@ -12,9 +12,9 @@ export const signupUser = async (data) => {
 };
 
 export const getDashboard = async () => {
-    return axios.get('http://localhost:5000/api/protected/dashboard', {
-      headers: {
-        Authorization: `Bearer ${getToken()}`
-      }
-    });
-  };
+  return axios.get('http://localhost:5000/api/protected/dashboard', {
+    headers: {
+      Authorization: `Bearer ${getToken()}`
+    }
+  });
+};
