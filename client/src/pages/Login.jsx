@@ -14,6 +14,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await loginUser(form);
+      sessionStorage.setItem("username",res.data.user.name)
+      console.log(res)
       login(res.data.token);
       navigate('/');
     } catch (err) {
